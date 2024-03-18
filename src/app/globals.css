@@ -2,26 +2,204 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* font-size: 16px; */
+  background-color: #F5F5F5;
+}
+
+::selection {
+  background: #B8DDFE;
+  /* Background color */
+}
+
+/* Styles the scrollbar track */
+::-webkit-scrollbar {
+  width: 6px;
+  /* for vertical scrollbars */
+  height: 6px;
+  /* for horizontal scrollbars */
+}
+
+/* Styles the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #b1b1b1;
+  /* thumb color */
+  border-radius: 6px;
+  /* rounded corners */
+}
+
+/* Changes the color on hover or when being clicked */
+::-webkit-scrollbar-thumb:hover {
+  background: #a9a9a9;
+}
+
+/* Styles the scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* track color */
+  border-radius: 6px;
+  /* rounded corners */
+}
+
+/* Firefox requires a different approach */
+/* For Firefox, you can only change the thumb color */
+* {
+  scrollbar-width: thin;
+  /* "auto" or "thin" */
+  scrollbar-color: #888 #f1f1f1;
+  /* thumb and track color */
+}
+
+.dashboard {
+  @apply relative bg-white my-4 w-full h-full rounded-xl overflow-y-auto;
+}
+
+/* HEADER */
+
+.toggle-btn {
+  @apply absolute top-6;
+}
+
+.toolbar {
+  @apply space-x-2 mb-5;
+}
+
+.toolbar-btn {
+  @apply bg-codegrey hover:bg-outputgrey p-2 text-sm;
+}
+
+/* PLAYGROUND */
+
+.cell {
+  @apply relative text-sm w-[840px] h-fit;
+}
+
+.cell-marker {
+  @apply w-1.5 rounded-sm h-full absolute -left-5;
+}
+
+.cell-input {
+  @apply bg-codegrey rounded-t p-6 py-2
+}
+
+.cell-output {
+  @apply p-3 bg-outputgrey rounded-b overflow-auto max-h-[400px]
+}
+
+.cell-tools {
+  @apply space-x-2 m-4 flex justify-center h-8 w-full;
+}
+
+.cell-tool {
+  @apply flex bg-codegrey hover:bg-outputgrey p-2 text-xs;
+}
+
+/* FILES */
+.file-explorer {
+  @apply fixed py-10 px-6 overflow-y-auto w-[250px];
+}
+
+.file-stack {
+  @apply text-sm space-y-3;
+}
+
+.file {
+  @apply w-full rounded-lg bg-white text-bigblue px-4 py-2 hover:cursor-pointer flex items-center;
+}
+
+
+/* CHAT */
+.chat-window {
+  @apply fixed py-10 px-6 right-0 h-full w-[510px] overflow-x-auto;
+}
+
+.messages {
+  @apply space-y-3 w-full;
+}
+
+.message {
+  @apply rounded-lg px-4 py-2 flex w-full;
+}
+
+.prompt {
+  @apply fixed bottom-4 right-4;
+}
+
+.round-btn {
+  @apply rounded-full px-3 py-1 absolute bottom-4 right-4;
 }
